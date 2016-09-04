@@ -55,7 +55,15 @@ defmodule Ex03 do
 
   """
 
-  def odd_even . . . "your code"
+  def odd_even([a|rest]) do
+    cond do
+      Integer.is_odd(a)->[:odd| odd_even(rest)]
+      Integer.is_even(a)->[:even|odd_even(rest)]
+    end
+  end
+  def odd_even([]) do
+    []
+  end
 
 
   ##############################################################################
@@ -77,8 +85,13 @@ defmodule Ex03 do
 
   """
 
-  def list_contains . .. "your code"
-
+  def list_contains([a|rest],b) do
+    cond do 
+      a==b->true
+      true->list_contains(rest,b)
+    end
+  end
+  def list_contains([],_b) do false end
   ##############################################################################
   # 3.3:  5 points #
   ##################
@@ -92,7 +105,7 @@ defmodule Ex03 do
   a function that checks for the equality of two lists. You don't
   need to consider nested lists.
 
-      iex> Ex03.list_equal [ 1, 2, 3 ], [1, 2, 3]
+      iex> Ex03.list_equal [ 1, 2, 3 ], [1, 2, 3 ]
       true
       iex> Ex03.list_equal [ 1, 2, 3 ], [1, 2, 3, 4]
       false
@@ -101,7 +114,9 @@ defmodule Ex03 do
 
   """
 
-  def list_equal . . . "your code"
+  def list_equal(a,a), do: true
+  def list_equal(_a,_b), do: false
+
 
 
 
@@ -149,8 +164,31 @@ defmodule Ex03 do
   Think a little about a nice way to lay this code out.
   """
 
-  def won . . . "your code"
+  def won ({a,b,c}) do 
+    cond do
+      a==b->
+        cond do
+          b==c->true
+          true->false
+        end
+      true->false
+    end
+  end
 
+  def won({a,b,c,d,e,f,g,h,i}) do
+    cond do
+      won({a,b,c})->a
+      won({d,e,f})->d
+      won({g,h,i})->g
+      won({a,d,g})->a
+      won({b,e,h})->b
+      won({c,f,i})->c
+      won({a,e,i})->a
+      won({c,e,g})->c
+      true->false
+    end
+  end 
+    
 
   ###########################
   # IGNORE FROM HERE TO END #
@@ -161,7 +199,6 @@ defmodule Ex03 do
   def __after_compile__(_env, bytecode) do
     File.write("Elixir.Ex03.beam", bytecode)
   end
-
 end
 
 
