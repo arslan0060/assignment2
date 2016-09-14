@@ -114,9 +114,11 @@ defmodule Ex03 do
 
   """
 
-  def list_equal(a,a), do: true
-  def list_equal(_a,_b), do: false
-
+  def list_equal([_a|rest],[_a|rest2]), do: list_equal(rest,rest2)
+  def list_equal([_a|_rest],[_b|_rest2]), do: false
+  def list_equal([],[_b|_rest]), do: false
+  def list_equal([_a|_rest],[]), do: false
+  def list_equal([],[]), do: true
 
 
 
