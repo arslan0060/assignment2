@@ -67,28 +67,22 @@ defmodule Ex04 do
   `Integer.is_odd`, and you can use the `reverse` function you defined
   above. Feel free to write helper functions if you want.
 
-      iex> Ex04.even_odd [ 1, 2, 3, 4, 5 ]
+      iex> Ex04.even_odd [1,2,3,4,5]
       { [ 2, 4],  [ 1, 3, 5 ] }
 
   Hint: you're taking a list and converting it into something else. What function
   helps you do that. And, if you use that function, what does it return? That
   return value will be the thing you have to manipulate.
   """
-  def add_if_even(num ,list) do
-    cond do
-      Integer.is_even(num)-> [num|list]
-      true->list
-    end
-  end
-
-  def add_if_odd(num ,list) do
-    cond do
-      Integer.is_odd(num)-> [num|list]
-      true->list
-    end
+  
+  def add_even_odd(num, {list1,list2}) do
+  	cond do
+  		Integer.is_odd(num)->{list1,[num|list2]}
+  		Integer.is_even(num)-> {[num|list1],list2}
+  	end
   end
   
-  def even_odd(list), do: {reduce(list,[], &add_if_even(&1,&2))|>reverse, reduce(list,[], &add_if_odd(&1,&2))|>reverse}
+  def even_odd(list), do: reduce(list|>reverse,{[],[]}, &add_even_odd(&1,&2))
 
 
 
